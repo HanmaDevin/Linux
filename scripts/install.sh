@@ -53,23 +53,17 @@ add_wallpaper() {
   if [[ ! -d "$HOME/Pictures/wallpaper" ]]; then
     mkdir -p "$HOME/Pictures/wallpaper"
   fi
-  cp -a "$HOME/windows/Linux/wallpaper/." "$HOME/Pictures/wallpaper/" && echo "Finished adding wallpapers!" || echo "Failed to add wallpapers."
+  cp -a "$HOME/Linux/wallpaper/." "$HOME/Pictures/wallpaper/" && echo "Finished adding wallpapers!" || echo "Failed to add wallpapers."
 }
 
-case $answer in
-  1)
-    install_packages "apt" "zip" "ufw" "zsh" "fish" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
-    configure_git
-    add_ssh_key
-    config_ufw
-
+add_configs() {
 	echo "Adding geany colorschemes"
 
 	if [[ ! -d "$HOME/.config/geany/colorschemes" ]]; then
         mkdir -p "$HOME/.config/geany/colorschemes"
     fi
 
-	cp -a "$HOME/windows/Linux/geany/colorschemes/." "$HOME/.config/geany/colorschemes"
+	cp -a "$HOME/Linux/geany/." "$HOME/.config/geany/colorschemes"
 
 	echo "Finished!"
 
@@ -79,7 +73,7 @@ case $answer in
         mkdir -p "$HOME/.config/btop"
     fi
 
-    cp "$HOME/windows/Linux/btop/btop.conf" "$HOME/.config/btop"
+    cp "$HOME/Linux/btop/btop.conf" "$HOME/.config/btop"
 
     echo "Finished!"
 
@@ -89,7 +83,7 @@ case $answer in
         mkdir -p "$HOME/.config/kitty"
     fi
 
-    cp -a "$HOME/windows/Linux/kitty/." "$HOME/.config/kitty"
+    cp -a "$HOME/Linux/kitty/." "$HOME/.config/kitty"
 
     echo "Finished!"
 
@@ -97,13 +91,13 @@ case $answer in
     echo "Adding neovim plugin"
     echo "Running neovim script"
 
-    bash "$HOME/windows/Linux/scripts/neovim.sh"
+    bash "$HOME/Linux/scripts/neovim.sh"
 
     if [[ ! -d "$HOME/.config/nvim/lua/plugins/" ]]; then
       mkdir -p "$HOME/.config/nvim/lua/plugins/"
     fi
 
-    cp "$HOME/windows/Linux/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
+    cp "$HOME/Linux/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
 
     echo "Finished!"
 
@@ -113,27 +107,27 @@ case $answer in
 
     echo "Adding font and cursor"
 
-    sudo cp "$HOME/windows/Linux/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
-    sudo cp -r "$HOME/windows/Linux/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
+    sudo cp "$HOME/Linux/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
+    sudo cp -r "$HOME/Linux/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
 
     echo "Finished!"
+}
 
-    read -p "Use (1) fish or (2) zsh? " shell
-    if [[ "$shell" -eq 2 ]]; then
-      echo "adding zshrc"
+case $answer in
+  1)
+    install_packages "apt" "zip" "ufw" "zsh" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
+    configure_git
+    add_ssh_key
+    config_ufw
 
-      bash "$HOME/windows/Linux/scripts/p10k-theme.sh"
-      cp "$HOME/windows/Linux/zsh/debianzshrc" "$HOME/.zshrc"
+	add_configs
+	
+    echo "adding zshrc"
 
-      echo "Finished!"
+    bash "$HOME/Linux/scripts/p10k-theme.sh"
+    cp "$HOME/Linux/zsh/debianzshrc" "$HOME/.zshrc"
 
-    elif [[ "$shell" -eq 1 ]]; then
-      echo "adding fish config"
-
-      cp "$HOME/windows/Linux/fish/debian.fish" "$HOME/.config/fish/config.fish"
-
-      echo "Finished!"
-    fi
+    echo "Finished!"
     ;;
   2)
     install_packages "dnf" "zip" "ufw" "zsh" "unzip" "wget" "curl" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "geany" "mediawriter"
@@ -141,233 +135,44 @@ case $answer in
     add_ssh_key
     config_ufw
 
-	echo "Adding geany colorschemes"
+	add_configs
 
-	if [[ ! -d "$HOME/.config/geany/colorschemes" ]]; then
-        mkdir -p "$HOME/.config/geany/colorschemes"
-    fi
+    echo "adding zshrc"
 
-	cp -a "$HOME/windows/Linux/geany/colorschemes/." "$HOME/.config/geany/colorschemes"
-
-	echo "Finished!"
-    
-    echo "Adding btop config"
-
-    if [[ ! -d "$HOME/.config/btop" ]]; then
-        mkdir -p "$HOME/.config/btop"
-    fi
-
-    cp "$HOME/windows/Linux/btop/btop.conf" "$HOME/.config/btop"
+    bash "$HOME/Linux/scripts/p10k-theme.sh"
+    cp "$HOME/Linux/zsh/fedorazshrc" "$HOME/.zshrc"
 
     echo "Finished!"
-
-    echo "Adding kitty config"
-
-    if [[ ! -d "$HOME/.config/kitty" ]]; then
-        mkdir -p "$HOME/.config/kitty"
-    fi
-
-    cp -a "$HOME/windows/Linux/kitty/." "$HOME/.config/kitty"
-
-    echo "Finished!"
-
-    # adding neovim plugin
-    echo "Adding neovim plugin"
-    echo "Running neovim script"
-
-    bash "$HOME/windows/Linux/scripts/neovim.sh"
-
-    if [[ ! -d "$HOME/.config/nvim/lua/plugins/" ]]; then
-      mkdir -p "$HOME/.config/nvim/lua/plugins/"
-    fi
-
-    cp "$HOME/windows/Linux/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
-
-    echo "Finished!"
-
-    add_wallpaper
-    
-    install_nitch
-
-    echo "Adding font and cursor"
-
-    sudo cp "$HOME/windows/Linux/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
-    sudo cp -r "$HOME/windows/Linux/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
-
-    echo "Finished!"
-
-    read -p "Use (1) fish or (2) zsh? " shell
-    if [[ "$shell" -eq 2 ]]; then
-      echo "adding zshrc"
-
-      bash "$HOME/windows/Linux/scripts/p10k-theme.sh"
-      cp "$HOME/windows/Linux/zsh/fedorazshrc" "$HOME/.zshrc"
-
-      echo "Finished!"
-
-    elif [[ "$shell" -eq 1 ]]; then
-      echo "adding fish config"
-
-      cp "$HOME/windows/Linux/fish/fedora.fish" "$HOME/.config/fish/config.fish"
-
-      echo "Finished!"
-    fi
-    ;;
+	;;
   3)
-    install_packages "zypper" "zip" "ufw" "zsh" "fish" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
+    install_packages "zypper" "zip" "ufw" "zsh" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
     configure_git
     add_ssh_key
     config_ufw
-
-	echo "Adding geany colorschemes"
-
-	if [[ ! -d "$HOME/.config/geany/colorschemes" ]]; then
-        mkdir -p "$HOME/.config/geany/colorschemes"
-    fi
-
-	cp -a "$HOME/windows/Linux/geany/colorschemes/." "$HOME/.config/geany/colorschemes"
-
-	echo "Finished!"
     
-    echo "Adding btop config"
+    add_configs
 
-    if [[ ! -d "$HOME/.config/btop" ]]; then
-        mkdir -p "$HOME/.config/btop"
-    fi
+    echo "adding zshrc"
 
-    cp "$HOME/windows/Linux/btop/btop.conf" "$HOME/.config/btop"
-
-    echo "Finished!"
-
-    echo "Adding kitty config"
-
-    if [[ ! -d "$HOME/.config/kitty" ]]; then
-        mkdir -p "$HOME/.config/kitty"
-    fi
-
-    cp -a "$HOME/windows/Linux/kitty/." "$HOME/.config/kitty"
+    bash "$HOME/Linux/scripts/p10k-theme.sh"
+    cp "$HOME/Linux/zsh/debianzshrc" "$HOME/.zshrc"
 
     echo "Finished!"
-
-    # adding neovim plugin
-    echo "Adding neovim plugin"
-    echo "Running neovim script"
-
-    bash "$HOME/windows/Linux/scripts/neovim.sh"
-
-    if [[ ! -d "$HOME/.config/nvim/lua/plugins/" ]]; then
-      mkdir -p "$HOME/.config/nvim/lua/plugins/"
-    fi
-
-    cp "$HOME/windows/Linux/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
-
-    echo "Finished!"
-
-    add_wallpaper
-    
-    install_nitch
-
-    echo "Adding font and cursor"
-
-    sudo cp "$HOME/windows/Linux/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
-    sudo cp -r "$HOME/windows/Linux/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
-
-    echo "Finished!"
-
-    read -p "Use (1) fish or (2) zsh? " shell
-    if [[ "$shell" -eq 2 ]]; then
-      echo "adding zshrc"
-
-      bash "$HOME/windows/Linux/scripts/p10k-theme.sh"
-      cp "$HOME/windows/Linux/zsh/debianzshrc" "$HOME/.zshrc"
-
-      echo "Finished!"
-
-    elif [[ "$shell" -eq 1 ]]; then
-      echo "adding fish config"
-
-      cp "$HOME/windows/Linux/fish/debian.fish" "$HOME/.config/fish/config.fish"
-
-      echo "Finished!"
-    fi
-    ;;
+	;;
   4)
-    install_packages "pacman" "zip" "ufw" "zsh" "fish" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
+    install_packages "pacman" "zip" "ufw" "zsh" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
     configure_git
     add_ssh_key
     config_ufw
 
-	echo "Adding geany colorschemes"
-
-	if [[ ! -d "$HOME/.config/geany/colorschemes" ]]; then
-        mkdir -p "$HOME/.config/geany/colorschemes"
-    fi
-
-	cp -a "$HOME/windows/Linux/geany/colorschemes/." "$HOME/.config/geany/colorschemes"
-
-	echo "Finished!"
-
-    echo "Adding btop config"
-
-    if [[ ! -d "$HOME/.config/btop" ]]; then
-        mkdir -p "$HOME/.config/btop"
-    fi
-
-    cp "$HOME/windows/Linux/btop/btop.conf" "$HOME/.config/btop"
-
-    echo "Finished!"
-
-    echo "Adding kitty config"
-
-    if [[ ! -d "$HOME/.config/kitty" ]]; then
-        mkdir -p "$HOME/.config/kitty"
-    fi
-
-    cp -a "$HOME/windows/Linux/kitty/." "$HOME/.config/kitty"
-
-    echo "Finished!"
-
-    # adding neovim plugin
-    echo "Adding neovim plugin"
-    echo "Running neovim script"
-
-    bash "$HOME/windows/Linux/scripts/neovim.sh"
-
-    if [[ ! -d "$HOME/.config/nvim/lua/plugins/" ]]; then
-      mkdir -p "$HOME/.config/nvim/lua/plugins/"
-    fi
-
-    cp "$HOME/windows/Linux/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
-
-    echo "Finished!"
-
-    add_wallpaper
+	add_configs
     
-    install_nitch
+    echo "adding zshrc"
 
-    echo "Adding font and cursor"
-
-    sudo cp "$HOME/windows/Linux/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
-    sudo cp -r "$HOME/windows/Linux/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
+    bash "$HOME/Linux/scripts/p10k-theme.sh"
+    cp "$HOME/zsh/Linux/debianzshrc" "$HOME/.zshrc"
 
     echo "Finished!"
-
-    read -p "Use (1) fish or (2) zsh? " shell
-    if [[ "$shell" -eq 2 ]]; then
-      echo "adding zshrc"
-
-      bash "$HOME/windows/Linux/scripts/p10k-theme.sh"
-      cp "$HOME/windows/zsh/Linux/debianzshrc" "$HOME/.zshrc"
-
-      echo "Finished!"
-
-    elif [[ "$shell" -eq 1 ]]; then
-      echo "adding fish config"
-
-      cp "$HOME/windows/Linux/fish/debian.fish" "$HOME/.config/fish/config.fish"
-
-      echo "Finished!"
-    fi
     ;;
   *)
     echo "Do not know what to do, Bye!!"
