@@ -71,6 +71,8 @@ alias update="sudo apt update && apt upgrade -y"
 
 alias editzsh="nano ~/.zshrc"
 
+alias g="geany"
+
 # visual
 alias open="xdg-open"
 alias cat='batcat --theme "Dracula"'
