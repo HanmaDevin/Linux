@@ -125,7 +125,7 @@ case $answer in
     echo "adding zshrc"
 
     bash "$PWD/scripts/p10k-theme.sh"
-    cp "$PWD/zsh/debianzshrc" "$HOME/.zshrc"
+    cp "$PWD/zsh/debianzsh" "$HOME/.zshrc"
 
     echo "Finished!"
     ;;
@@ -140,7 +140,7 @@ case $answer in
     echo "adding zshrc"
 
     bash "$PWD/scripts/p10k-theme.sh"
-    cp "$PWD/zsh/fedorazshrc" "$HOME/.zshrc"
+    cp "$PWD/zsh/fedorazsh" "$HOME/.zshrc"
 
     echo "Finished!"
 	;;
@@ -155,7 +155,7 @@ case $answer in
     echo "adding zshrc"
 
     bash "$PWD/scripts/p10k-theme.sh"
-    cp "$PWD/zsh/debianzshrc" "$HOME/.zshrc"
+    cp "$PWD/zsh/debianzsh" "$HOME/.zshrc"
 
     echo "Finished!"
 	;;
@@ -170,7 +170,7 @@ case $answer in
     echo "adding zshrc"
 
     bash "$PWD/scripts/p10k-theme.sh"
-    cp "$PWD/zsh/debianzshrc" "$HOME/.zshrc"
+    cp "$PWD/zsh/debianzsh" "$HOME/.zshrc"
 
     echo "Finished!"
     ;;
