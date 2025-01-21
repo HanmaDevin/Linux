@@ -53,7 +53,7 @@ add_wallpaper() {
   if [[ ! -d "$HOME/Pictures/wallpaper" ]]; then
     mkdir -p "$HOME/Pictures/wallpaper"
   fi
-  cp -a "$HOME/Linux/wallpaper/." "$HOME/Pictures/wallpaper/" && echo "Finished adding wallpapers!" || echo "Failed to add wallpapers."
+  cp -a "$PWD/wallpaper/." "$HOME/Pictures/wallpaper/" && echo "Finished adding wallpapers!" || echo "Failed to add wallpapers."
 }
 
 add_configs() {
@@ -63,7 +63,7 @@ add_configs() {
         mkdir -p "$HOME/.config/geany/colorschemes"
     fi
 
-	cp -a "$HOME/Linux/geany/." "$HOME/.config/geany/colorschemes"
+	cp -a "$PWD/geany/." "$HOME/.config/geany/colorschemes"
 
 	echo "Finished!"
 
@@ -73,7 +73,7 @@ add_configs() {
         mkdir -p "$HOME/.config/btop"
     fi
 
-    cp "$HOME/Linux/btop/btop.conf" "$HOME/.config/btop"
+    cp "$PWD/btop/btop.conf" "$HOME/.config/btop"
 
     echo "Finished!"
 
@@ -83,7 +83,7 @@ add_configs() {
         mkdir -p "$HOME/.config/kitty"
     fi
 
-    cp -a "$HOME/Linux/kitty/." "$HOME/.config/kitty"
+    cp -a "$PWD/kitty/." "$HOME/.config/kitty"
 
     echo "Finished!"
 
@@ -91,13 +91,13 @@ add_configs() {
     echo "Adding neovim plugin"
     echo "Running neovim script"
 
-    bash "$HOME/Linux/scripts/neovim.sh"
+    bash "$PWD/scripts/neovim.sh"
 
     if [[ ! -d "$HOME/.config/nvim/lua/plugins/" ]]; then
       mkdir -p "$HOME/.config/nvim/lua/plugins/"
     fi
 
-    cp "$HOME/Linux/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
+    cp "$PWD/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
 
     echo "Finished!"
 
@@ -107,8 +107,8 @@ add_configs() {
 
     echo "Adding font and cursor"
 
-    sudo cp "$HOME/Linux/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
-    sudo cp -r "$HOME/Linux/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
+    sudo cp "$PWD/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
+    sudo cp -r "$PWD/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
 
     echo "Finished!"
 }
@@ -124,8 +124,8 @@ case $answer in
 	
     echo "adding zshrc"
 
-    bash "$HOME/Linux/scripts/p10k-theme.sh"
-    cp "$HOME/Linux/zsh/debianzshrc" "$HOME/.zshrc"
+    bash "$PWD/scripts/p10k-theme.sh"
+    cp "$PWD/zsh/debianzshrc" "$HOME/.zshrc"
 
     echo "Finished!"
     ;;
@@ -139,8 +139,8 @@ case $answer in
 
     echo "adding zshrc"
 
-    bash "$HOME/Linux/scripts/p10k-theme.sh"
-    cp "$HOME/Linux/zsh/fedorazshrc" "$HOME/.zshrc"
+    bash "$PWD/scripts/p10k-theme.sh"
+    cp "$PWD/zsh/fedorazshrc" "$HOME/.zshrc"
 
     echo "Finished!"
 	;;
@@ -154,8 +154,8 @@ case $answer in
 
     echo "adding zshrc"
 
-    bash "$HOME/Linux/scripts/p10k-theme.sh"
-    cp "$HOME/Linux/zsh/debianzshrc" "$HOME/.zshrc"
+    bash "$PWD/scripts/p10k-theme.sh"
+    cp "$PWD/zsh/debianzshrc" "$HOME/.zshrc"
 
     echo "Finished!"
 	;;
@@ -169,8 +169,8 @@ case $answer in
     
     echo "adding zshrc"
 
-    bash "$HOME/Linux/scripts/p10k-theme.sh"
-    cp "$HOME/zsh/Linux/debianzshrc" "$HOME/.zshrc"
+    bash "$PWD/scripts/p10k-theme.sh"
+    cp "$PWD/zsh/debianzshrc" "$HOME/.zshrc"
 
     echo "Finished!"
     ;;
