@@ -115,7 +115,7 @@ add_configs() {
 
 case $answer in
   1)
-    install_packages "apt" "zip" "ufw" "zsh" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
+    install_packages "apt" "zip" "ufw" "zsh" "unzip" "wget" "lutris" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
     configure_git
     add_ssh_key
     config_ufw
