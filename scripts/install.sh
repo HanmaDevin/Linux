@@ -1,12 +1,14 @@
 #! /bin/bash
 
-echo "What package manager do you use?"
-echo "(1) apt"
-echo "(2) dnf"
-echo "(3) zypper"
-echo "(4) pacman"
+#echo "What package manager do you use?"
+#echo "(1) apt"
+#echo "(2) dnf"
+#echo "(3) zypper"
+#echo "(4) pacman"
 
-read answer
+#read answer
+
+answer="4"
 
 install_packages() {
   local packages=("$@")
@@ -53,123 +55,123 @@ add_ssh_key() {
   fi
 }
 
-add_wallpaper() {
-  if [[ ! -d "$HOME/Pictures/wallpaper" ]]; then
-    mkdir -p "$HOME/Pictures/wallpaper"
-  fi
-  cp -a "$PWD/wallpaper/." "$HOME/Pictures/wallpaper/" && echo "Finished adding wallpapers!" || echo "Failed to add wallpapers."
-}
+#add_wallpaper() {
+  #if [[ ! -d "$HOME/Pictures/wallpaper" ]]; then
+    #mkdir -p "$HOME/Pictures/wallpaper"
+  #fi
+  #cp -a "$PWD/wallpaper/." "$HOME/Pictures/wallpaper/" && echo "Finished adding wallpapers!" || echo "Failed to add wallpapers."
+#}
 
-add_configs() {
-	echo "Adding geany colorschemes"
+#add_configs() {
+	#echo "Adding geany colorschemes"
 
-	if [[ ! -d "$HOME/.config/geany/colorschemes" ]]; then
-        mkdir -p "$HOME/.config/geany/colorschemes"
-    fi
+	#if [[ ! -d "$HOME/.config/geany/colorschemes" ]]; then
+        #mkdir -p "$HOME/.config/geany/colorschemes"
+    #fi
 
-	cp -a "$PWD/geany/." "$HOME/.config/geany/colorschemes"
+	#cp -a "$PWD/geany/." "$HOME/.config/geany/colorschemes"
 
-	echo "Finished!"
+	#echo "Finished!"
 
-    echo "Adding btop config"
+    #echo "Adding btop config"
 
-    if [[ ! -d "$HOME/.config/btop" ]]; then
-        mkdir -p "$HOME/.config/btop"
-    fi
+    #if [[ ! -d "$HOME/.config/btop" ]]; then
+        #mkdir -p "$HOME/.config/btop"
+    #fi
 
-    cp "$PWD/btop/btop.conf" "$HOME/.config/btop"
+    #cp "$PWD/btop/btop.conf" "$HOME/.config/btop"
 
-    echo "Finished!"
+    #echo "Finished!"
 
-    echo "Adding kitty config"
+    #echo "Adding kitty config"
 
-    if [[ ! -d "$HOME/.config/kitty" ]]; then
-        mkdir -p "$HOME/.config/kitty"
-    fi
+    #if [[ ! -d "$HOME/.config/kitty" ]]; then
+        #mkdir -p "$HOME/.config/kitty"
+    #fi
 
-    cp -a "$PWD/kitty/." "$HOME/.config/kitty"
+    #cp -a "$PWD/kitty/." "$HOME/.config/kitty"
 
-    echo "Finished!"
+    #echo "Finished!"
 
-    # adding neovim plugin
-    echo "Adding neovim plugin"
-    echo "Running neovim script"
+    ## adding neovim plugin
+    #echo "Adding neovim plugin"
+    #echo "Running neovim script"
 
-    bash "$PWD/scripts/neovim.sh"
+    #bash "$PWD/scripts/neovim.sh"
 
-    if [[ ! -d "$HOME/.config/nvim/lua/plugins/" ]]; then
-      mkdir -p "$HOME/.config/nvim/lua/plugins/"
-    fi
+    #if [[ ! -d "$HOME/.config/nvim/lua/plugins/" ]]; then
+      #mkdir -p "$HOME/.config/nvim/lua/plugins/"
+    #fi
 
-    cp "$PWD/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
+    #cp "$PWD/neovim/lazygit.lua" "$HOME/.config/nvim/lua/plugins/"
 
-    echo "Finished!"
+    #echo "Finished!"
 
-    add_wallpaper
+    #add_wallpaper
     
-    install_nitch
+    #install_nitch
 
-    echo "Adding font and cursor"
+    #echo "Adding font and cursor"
 
-    sudo cp "$PWD/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
-    sudo cp -r "$PWD/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
+    #sudo cp "$PWD/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts/"
+    #sudo cp -r "$PWD/Cursor/Bibata-Modern-Ice/" "/usr/share/icons/"
 
-    echo "Finished!"
-}
+    #echo "Finished!"
+#}
 
 case $answer in
-  1)
-    install_packages "apt" "zip" "ufw" "zsh" "unzip" "wget" "lutris" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
-    configure_git
-    add_ssh_key
-    config_ufw
+  #1)
+    #install_packages "apt" "zip" "ufw" "zsh" "unzip" "stow" "wget" "lutris" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
+    #configure_git
+    #add_ssh_key
+    #config_ufw
 
-	add_configs
+	##add_configs
 	
-    echo "adding zshrc"
+    #echo "adding zshrc"
 
-    bash "$PWD/scripts/p10k-theme.sh"
-    cp "$PWD/zsh/debianzsh" "$HOME/.zshrc"
+    #bash "$PWD/scripts/p10k-theme.sh"
+    #rm "$HOME/.zshrc"
 
-    echo "Finished!"
-    ;;
-  2)
-    install_packages "dnf" "zip" "ufw" "zsh" "unzip" "wget" "curl" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "geany" "mediawriter"
-    configure_git
-    add_ssh_key
-    config_ufw
+    #echo "Finished!"
+    #;;
+  #2)
+    #install_packages "dnf" "zip" "ufw" "zsh" "unzip" "stow" "wget" "curl" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "geany" "mediawriter"
+    #configure_git
+    #add_ssh_key
+    #config_ufw
 
-	add_configs
+	##add_configs
 
-    echo "adding zshrc"
+    #echo "adding zshrc"
 
-    bash "$PWD/scripts/p10k-theme.sh"
-    cp "$PWD/zsh/fedorazsh" "$HOME/.zshrc"
+    #bash "$PWD/scripts/p10k-theme.sh"
+    #cp "$PWD/zsh/fedorazsh" "$HOME/.zshrc"
 
-    echo "Finished!"
-	;;
-  3)
-    install_packages "zypper" "zip" "ufw" "zsh" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
-    configure_git
-    add_ssh_key
-    config_ufw
+    #echo "Finished!"
+	#;;
+  #3)
+    #install_packages "zypper" "zip" "ufw" "zsh" "unzip" "stow" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
+    #configure_git
+    #add_ssh_key
+    #config_ufw
     
-    add_configs
+    ##add_configs
 
-    echo "adding zshrc"
+    #echo "adding zshrc"
 
-    bash "$PWD/scripts/p10k-theme.sh"
-    cp "$PWD/zsh/debianzsh" "$HOME/.zshrc"
+    #bash "$PWD/scripts/p10k-theme.sh"
+    #cp "$PWD/zsh/debianzsh" "$HOME/.zshrc"
 
-    echo "Finished!"
-	;;
+    #echo "Finished!"
+	#;;
   4)
-    install_packages "pacman" "zip" "ufw" "zsh" "unzip" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
+    install_packages "pacman" "zip" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
     configure_git
     add_ssh_key
     config_ufw
 
-	add_configs
+	#add_configs
     
     echo "adding zshrc"
 
