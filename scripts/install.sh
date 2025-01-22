@@ -11,7 +11,11 @@ read answer
 install_packages() {
   local packages=("$@")
   for package in "${packages[@]}"; do
-    sudo "$1" install -y "$package" || { echo "Failed to install $package"; exit 1; }
+	if [[ "$1" == "pacman" ]]; then
+		sudo pacman -S "$package" --noconfirm || { echo "Failed to install $package"; exit 1; }
+	else
+		sudo "$1" install -y "$package" || { echo "Failed to install $package"; exit 1; }
+	fi
   done
 }
 
