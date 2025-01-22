@@ -10,30 +10,38 @@ log() {
 
 log "Starting setup script"
 
-packages=("git" "steam" "uthash" "pixman" "firefox" "picom" "discord" "iw" "python-pipx" "polybar"
+packages=("steam" "uthash" "pixman" "firefox" "picom" "discord" "iw" "python-pipx" "polybar"
   "maim" "xclip" "xdotool" "pavucontrol" "lazygit" "eza" "texlive" "rofi" "btop" "zsh" "okular" "ttf-font-awesome"
   "neofetch" "feh" "blueman" "libreoffice-still" "ufw" "yazi" "neovim" "unzip" "zip" "fzf" "ntfs-3g" "fuse2" "wget" "curl"
   "gamemode" "mangohud" "zoxide" "bat" "bluez" "bluez-utils" "kitty")
 
 # Check if array is not empty
 if [[ ${#packages[@]} -gt 0 ]]; then
-  # Check for Linux distro and install packages
-  log "Detected OS: $ID"
-  case $ID in
-    "fedora")
+  echo "What package manager to use"
+  echo "(1) apt"
+  echo "(2) pacman"
+  echo "(3) dnf"
+  read answer
+  
+  case $answer in
+    "dnf")
       for package in "${packages[@]}"; do
         sudo dnf install -y "$package" || log "Failed to install $package"
       done
       ;;
-    "arch")
+    "pacman")
       for package in "${packages[@]}"; do
         sudo pacman -S --noconfirm "$package" || log "Failed to install $package"
       done
       ;;
-    *)
-      for package in "${packages[@]}"; do
+    "apt")
+	  for package in "${packages[@]}"; do
         sudo apt install -y "$package" || log "Failed to install $package"
       done
+      ;;
+    *)
+      echo "Do not know what to do bye"
+      exit 143
       ;;
   esac
 else
@@ -89,7 +97,6 @@ copy_config() {
 # Configurations
 log "Setting up configurations"
 
-copy_config "$HOME/.config/neofetch/config.conf" "$HOME/Linux/Neofetch-Theme/config.conf"
 copy_config "/etc/ly/config.ini" "$HOME/Linux/ly/ly.conf"
 copy_config "$HOME/.config/i3/config" "$HOME/Linux/i3-dotfiles/config"
 copy_config "$HOME/.config/picom/picom.conf" "$HOME/Linux/dotfiles/picom.conf"
@@ -97,18 +104,13 @@ copy_config "$HOME/.config/polybar/config.ini" "$HOME/Linux/i3-dotfiles/config.i
 copy_config "$HOME/.config/polybar/launch.sh" "$HOME/Linux/i3-dotfiles/launch.sh"
 copy_config "$HOME/.icons/Bibata-Modern-Ice" "$HOME/Linux/Cursor/Bibata-Modern-Ice"
 
-# install fonts
-sudo unzip -o "$HOME/Linux/Fonts/FiraCode.zip" -d "/usr/share/fonts/" && log "Installed fonts"
-
 copy_config "$HOME/.config/btop/btop.conf" "$HOME/Linux/btop/btop.conf"
-copy_config "/boot/grub/themes/dracula" "$HOME/Linux/Grub-Theme/dracula"
-sudo cp "$HOME/Linux/Grub-Theme/grub" "/etc/default/grub"
-sudo grub-mkconfig -o /boot/grub/grub.cfg && log "Updated GRUB config"
+
 copy_config "$HOME/.Xresources" "$HOME/Linux/i3-dotfiles/Xresources"
 copy_config "$HOME/.config/kitty/kitty.conf" "$HOME/Linux/kitty/kitty.conf"
 copy_config "$HOME/.config/nvim/lua/plugins/lazygit.lua" "$HOME/Linux/neovim/lazygit.lua"
 copy_config "$HOME/.config/yazi/yazi.toml" "$HOME/Linux/yazi/yazi.toml"
-mkdir -p ~/wallpaper/ && cp -a "$HOME/Linux/wallpaper/." "$HOME/wallpaper/"
+mkdir -p ~/Pictures/Wallpaper && cp -a "$HOME/Linux/wallpaper/." "$HOME/Pictures/Wallpaper"
 
 # i3-lock customization
 copy_config "$HOME/.config/i3-lock/lock.sh" "$HOME/Linux/i3-dotfiles/lock.sh"
