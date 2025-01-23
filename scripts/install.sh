@@ -27,6 +27,10 @@ config_ufw() {
   sudo ufw enable
 }
 
+install_yay(){
+  sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+}
+
 install_nitch() {
 	echo "Installing nitch..."
 	wget https://raw.githubusercontent.com/unxsh/nitch/main/setup.sh && sh setup.sh
@@ -95,6 +99,7 @@ case $answer in
     add_ssh_key
     config_ufw
     install_nitch
+    install_yay
     
     echo "adding zshrc"
 
