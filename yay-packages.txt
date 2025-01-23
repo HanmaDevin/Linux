@@ -1,0 +1,6 @@
+google-chrome
+jetbrains-toolbox
+lib32-libva-vdpau-driver
+libva-vdpau-driver
+savedesktop
+ulauncher
