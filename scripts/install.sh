@@ -94,7 +94,7 @@ case $answer in
     #echo "Finished!"
 	#;;
   4)
-    install_packages "pacman" "zip" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
+    install_packages "pacman" "zip" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
     configure_git
     add_ssh_key
     config_ufw
