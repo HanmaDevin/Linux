@@ -101,12 +101,10 @@ case $answer in
     install_nitch
     install_yay
     
-    echo "adding zshrc"
-
-    bash "$PWD/scripts/p10k-theme.sh"
-    cp "$PWD/zsh/debianzsh" "$HOME/.zshrc"
-
-    echo "Finished!"
+    echo "Creating work directory"
+    mkdir -p "$HOME/Documents/Github/Projects"
+    echo "Done"
+    
     ;;
   *)
     echo "Do not know what to do, Bye!!"
