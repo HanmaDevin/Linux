@@ -12,7 +12,7 @@ log "Starting setup script"
 
 packages=("steam" "uthash" "pixman" "firefox" "picom" "discord" "iw" "python-pipx" "polybar"
   "maim" "xclip" "xdotool" "pavucontrol" "lazygit" "eza" "texlive" "rofi" "btop" "zsh" "okular" "ttf-font-awesome"
-  "neofetch" "feh" "blueman" "libreoffice-still" "ufw" "yazi" "neovim" "unzip" "zip" "fzf" "ntfs-3g" "fuse2" "wget" "curl"
+  "vim" "feh" "blueman" "libreoffice-still" "ufw" "yazi" "unzip" "zip" "fzf" "ntfs-3g" "fuse2" "wget" "curl"
   "gamemode" "mangohud" "zoxide" "bat" "bluez" "bluez-utils" "kitty")
 
 # Check if array is not empty
