@@ -47,6 +47,21 @@ configure_git() {
   fi
 }
 
+install_themes() {
+  echo "Installing themes..."
+  
+  unzip "$PWD/Themes/GTK/Catppuccin-Dark-BL-MG.zip" -d "$PWD/Themes"
+  sudo mv "$PWD/Themes/Catppuccin-*" "/usr/share/themes"
+
+  unzip "$PWD/Themes/icons/Catppuccin-Mocha.zip" -d "$PWD/Themes"
+  sudo mv "$PWD/Themes/Catppuccin-Mocha" "/usr/share/icons"
+  
+  sudo cp "$PWD/Fonts/*" "/usr/share/fonts"
+  sudo cp -r "$PWD/Cursor/*" "/usr/share/icons"
+  
+  echo "Done!"
+}
+
 case $answer in
   #1)
     #install_packages "apt" "zip" "ufw" "zsh" "unzip" "stow" "wget" "lutris" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
@@ -98,12 +113,17 @@ case $answer in
     configure_git
     config_ufw
     install_nitch
+    install_themes
     
     echo "Creating work directory"
     mkdir -p "$HOME/Documents/Github/Projects"
     echo "Done"
     
     install_yay
+
+    echo "Installing packages from yay"
+    yay -S --noconfirm $(cat "$PWD/yay-packages.txt")
+    echo "Finished!"
     ;;
   *)
     echo "Do not know what to do, Bye!!"
