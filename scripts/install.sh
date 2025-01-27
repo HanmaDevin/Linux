@@ -99,12 +99,12 @@ case $answer in
     add_ssh_key
     config_ufw
     install_nitch
-    install_yay
     
     echo "Creating work directory"
     mkdir -p "$HOME/Documents/Github/Projects"
     echo "Done"
     
+    install_yay
     ;;
   *)
     echo "Do not know what to do, Bye!!"
