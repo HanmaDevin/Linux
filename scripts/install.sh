@@ -47,6 +47,7 @@ configure_git() {
   fi
 }
 
+
 install_themes() {
   echo "Installing themes..."
   
@@ -60,6 +61,11 @@ install_themes() {
   sudo cp -r "$PWD/Cursor/*" "/usr/share/icons"
   
   echo "Done!"
+
+add_tmux_tpm() {
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  mkdir -p ~/.config/tmux/plugins/catppuccin
+  git clone -b v2.1.2 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
 }
 
 case $answer in
@@ -115,6 +121,8 @@ case $answer in
     install_nitch
     install_themes
     
+    add_tmux_tpm
+
     echo "Creating work directory"
     mkdir -p "$HOME/Documents/Github/Projects"
     echo "Done"
