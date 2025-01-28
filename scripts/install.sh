@@ -109,7 +109,7 @@ case $answer in
     #echo "Finished!"
 	#;;
   4)
-    install_packages "pacman" "zip" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "vim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
+    install_packages "pacman" "zip" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "vim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins" "tmux"
     configure_git
     config_ufw
     install_nitch
