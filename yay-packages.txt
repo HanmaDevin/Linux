@@ -2,3 +2,4 @@ google-chrome
 jetbrains-toolbox
 savedesktop
 ulauncher
+lazydocker
