@@ -32,6 +32,8 @@ configure_git() {
     read -p "What is your email address? " useremail
     git config --global user.email "$useremail"
   fi
+
+  ssh-keygen -t ed25519 -C "$useremail"
 }
 
 
