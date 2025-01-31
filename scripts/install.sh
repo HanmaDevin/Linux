@@ -49,6 +49,20 @@ install_themes() {
   
   echo "Done!"
 
+  echo "Adding ulauncher themes..."
+
+  bash "$HOME/Linux/scripts/themes.sh"  
+
+  echo "Done!"
+
+  echo "Installing Vencord..."
+
+  bash "$HOME/Linux/Vencord/VencordInstaller.sh"
+
+  echo "Done!"
+
+}
+
 add_tmux_tpm() {
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   mkdir -p ~/.config/tmux/plugins/catppuccin 
