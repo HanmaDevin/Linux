@@ -1,23 +1,10 @@
 #! /bin/bash
 
-#echo "What package manager do you use?"
-#echo "(1) apt"
-#echo "(2) dnf"
-#echo "(3) zypper"
-#echo "(4) pacman"
-
-#read answer
-
-answer="4"
-
 install_packages() {
-  local packages=("$@")
+  packages=("zip" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins" "tmux" "jdk23-openjdk" "lazydocker" "docker-compose" "docker" "ripgrep")
+
   for package in "${packages[@]}"; do
-	if [[ "$1" == "pacman" ]]; then
 		sudo pacman -S "$package" --noconfirm || { echo "Failed to install $package"; exit 1; }
-	else
-		sudo "$1" install -y "$package" || { echo "Failed to install $package"; exit 1; }
-	fi
   done
 }
 
@@ -51,14 +38,14 @@ configure_git() {
 install_themes() {
   echo "Installing themes..."
   
-  unzip "$PWD/Themes/GTK/Catppuccin-Dark-BL-MG.zip" -d "$PWD/Themes"
-  sudo mv "$PWD/Themes/Catppuccin-*" "/usr/share/themes"
+  unzip "$HOME/Linux/Themes/GTK/Catppuccin-Dark-BL-MG.zip" -d "$PWD/Themes"
+  sudo mv "$HOME/Linux/Themes/Catppuccin-*" "/usr/share/themes"
 
-  unzip "$PWD/Themes/icons/Catppuccin-Mocha.zip" -d "$PWD/Themes"
-  sudo mv "$PWD/Themes/Catppuccin-Mocha" "/usr/share/icons"
+  unzip "$HOME/Linux/Themes/icons/Catppuccin-Mocha.zip" -d "$PWD/Themes"
+  sudo mv "$HOME/Linux/Themes/Catppuccin-Mocha" "/usr/share/icons"
   
-  sudo cp "$PWD/Fonts/*" "/usr/share/fonts"
-  sudo cp -r "$PWD/Cursor/*" "/usr/share/icons"
+  sudo cp "$HOME/Linux/Fonts/MesloLGS NF Regular.ttf" "/usr/share/fonts"
+  sudo cp -r "$HOME/Linux/Cursor/Bibata-Modern-Ice" "/usr/share/icons"
   
   echo "Done!"
 
@@ -68,73 +55,21 @@ add_tmux_tpm() {
   git clone -b v2.1.2 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
 }
 
-case $answer in
-  #1)
-    #install_packages "apt" "zip" "ufw" "zsh" "unzip" "stow" "wget" "lutris" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins"
-    #configure_git
-    #add_ssh_key
-    #config_ufw
+install_packages
+configure_git
 
-	##add_configs
-	
-    #echo "adding zshrc"
-
-    #bash "$PWD/scripts/p10k-theme.sh"
-    #rm "$HOME/.zshrc"
-
-    #echo "Finished!"
-    #;;
-  #2)
-    #install_packages "dnf" "zip" "ufw" "zsh" "unzip" "stow" "wget" "curl" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "geany" "mediawriter"
-    #configure_git
-    #add_ssh_key
-    #config_ufw
-
-	##add_configs
-
-    #echo "adding zshrc"
-
-    #bash "$PWD/scripts/p10k-theme.sh"
-    #cp "$PWD/zsh/fedorazsh" "$HOME/.zshrc"
-
-    #echo "Finished!"
-	#;;
-  #3)
-    #install_packages "zypper" "zip" "ufw" "zsh" "unzip" "stow" "wget" "curl" "neovim" "eza" "btop" "gamemode" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany"
-    #configure_git
-    #add_ssh_key
-    #config_ufw
+config_ufw
+install_nitch
+install_themes
     
-    ##add_configs
+add_tmux_tpm
 
-    #echo "adding zshrc"
-
-    #bash "$PWD/scripts/p10k-theme.sh"
-    #cp "$PWD/zsh/debianzsh" "$HOME/.zshrc"
-
-    #echo "Finished!"
-	#;;
-  4)
-    install_packages "pacman" "zip" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins" "tmux" "jdk23-openjdk" "lazydocker" "docker-compose" "docker" "ripgrep" 
-    configure_git
-    config_ufw
-    install_nitch
-    install_themes
+echo "Creating work directory"
+mkdir -p "$HOME/Documents/Github/Projects"
+echo "Done"
     
-    add_tmux_tpm
+install_yay
 
-    echo "Creating work directory"
-    mkdir -p "$HOME/Documents/Github/Projects"
-    echo "Done"
-    
-    install_yay
-
-    echo "Installing packages from yay"
-    yay -S --noconfirm $(cat "$PWD/yay-packages.txt")
-    echo "Finished!"
-    ;;
-  *)
-    echo "Do not know what to do, Bye!!"
-    exit 223
-    ;;
-esac
+echo "Installing packages from yay"
+yay -S --noconfirm $(cat "$PWD/yay-packages.txt")
+echo "Finished!"
