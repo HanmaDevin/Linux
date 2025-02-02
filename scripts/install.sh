@@ -1,7 +1,7 @@
 #! /bin/bash
 
 install_packages() {
-  packages=("zip" "ntfs-3g" "tree" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins" "tmux" "jdk23-openjdk" "lazydocker" "docker-compose" "docker" "ripgrep")
+  packages=("zip" "ntfs-3g" "tree" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins" "tmux" "jdk23-openjdk" "docker" "ripgrep" "rofi" "feh")
 
   for package in "${packages[@]}"; do
 		sudo pacman -S "$package" --noconfirm || { echo "Failed to install $package"; exit 1; }
@@ -65,6 +65,10 @@ install_themes() {
 
 }
 
+install_lvim() {
+  LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh)
+}
+
 add_tmux_tpm() {
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   mkdir -p ~/.config/tmux/plugins/catppuccin 
@@ -77,7 +81,7 @@ configure_git
 config_ufw
 install_nitch
 install_themes
-    
+install_lvim    
 add_tmux_tpm
 
 echo "Creating work directory"
@@ -87,5 +91,5 @@ echo "Done"
 install_yay
 
 echo "Installing packages from yay"
-yay -S --noconfirm $(cat "$PWD/yay-packages.txt")
+yay -S --noconfirm $(cat "$HOME/Linux/yay-packages.txt")
 echo "Finished!"
