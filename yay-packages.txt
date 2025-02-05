@@ -1,5 +1,4 @@
 google-chrome
-alternating-layouts-git
 jetbrains-toolbox
 savedesktop
 ulauncher
