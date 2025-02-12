@@ -65,10 +65,6 @@ install_themes() {
 
 }
 
-install_lvim() {
-  LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh)
-}
-
 add_tmux_tpm() {
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   mkdir -p ~/.config/tmux/plugins/catppuccin 
@@ -81,7 +77,6 @@ configure_git
 config_ufw
 install_nitch
 install_themes
-install_lvim    
 add_tmux_tpm
 
 echo "Creating work directory"
