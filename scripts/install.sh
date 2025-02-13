@@ -46,7 +46,7 @@ install_themes() {
   unzip "$HOME/Linux/Themes/icons/Catppuccin-Mocha.zip" -d "$PWD/Themes"
   sudo mv "$HOME/Linux/Themes/Catppuccin-Mocha" "/usr/share/icons"
   
-  sudo cp "$HOME/Linux/Fonts/*" "/usr/share/fonts"
+  sudo cp -a "$HOME/Linux/Fonts/*" "/usr/share/fonts"
   sudo cp -r "$HOME/Linux/Cursor/Bibata-Modern-Ice" "/usr/share/icons"
   
   echo "Done!"
