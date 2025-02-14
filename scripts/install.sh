@@ -4,7 +4,7 @@ install_packages() {
   packages=("zip" "ntfs-3g" "tree" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins" "tmux" "jdk23-openjdk" "docker" "ripgrep" "cargo" "fd" "starship" "okular" "vlc" "conky" "xclip" "isoimagewriter")
 
   for package in "${packages[@]}"; do
-		sudo pacman -S "$package" --noconfirm || { echo "Failed to install $package"; exit 1; }
+	sudo pacman -S "$package" --noconfirm || { echo "Failed to install $package"; exit 1; }
   done
 }
 
@@ -25,15 +25,17 @@ install_nitch() {
 }
 
 configure_git() {
-  read -p "Want to configure git? (y/n): " gitconfig
+  read -r -p "Want to configure git? (y/n): " gitconfig
   if [[ $gitconfig == "y" ]]; then
-    read -p "What is your GitHub username? " username
+    read -r -p "What is your GitHub username? " username
     git config --global user.name "$username"
-    read -p "What is your email address? " useremail
+    read -r -p "What is your email address? " useremail
     git config --global user.email "$useremail"
   fi
-
-  ssh-keygen -t ed25519 -C "$useremail"
+  
+  if [[ $gitconfig == "y" ]]; then
+    ssh-keygen -t ed25519 -C "$useremail"
+  fi
 }
 
 
@@ -61,6 +63,8 @@ install_themes() {
 
   bash "$HOME/Linux/Vencord/VencordInstaller.sh"
 
+  cp -a "$HOME/Linux/Vencord/themes/*" "$HOME/.config/Vencord/themes/"
+
   echo "Done!"
 
 }
@@ -86,5 +90,5 @@ echo "Done"
 install_yay
 
 echo "Installing packages from yay"
-yay -S --noconfirm $(cat "$HOME/Linux/yay-packages.txt")
+yay -S --noconfirm "$(cat "$HOME/Linux/yay-packages.txt")"
 echo "Finished!"
