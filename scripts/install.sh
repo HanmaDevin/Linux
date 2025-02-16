@@ -92,3 +92,7 @@ install_yay
 echo "Installing packages from yay"
 yay -S --noconfirm "$(cat "$HOME/Linux/yay-packages.txt")"
 echo "Finished!"
+
+echo "Changing pacman style..."
+sudo cp "$HOME/Linux/pacman.conf" "/etc/pacman.conf"
+echo "Finished!"
