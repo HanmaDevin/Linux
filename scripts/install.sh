@@ -1,7 +1,7 @@
 #! /bin/bash
 
 install_packages() {
-  packages=("zip" "ntfs-3g" "tree" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins" "tmux" "jdk23-openjdk" "docker" "ripgrep" "cargo" "fd" "starship" "okular" "vlc" "xclip" "isoimagewriter")
+  packages=("zip" "hyprland" "hyprpaper" "hyprlock" "wofi" "waybar" "ntfs-3g" "tree" "discord" "lazygit" "ufw" "zsh" "unzip" "wget" "stow" "curl" "yazi" "neovim" "eza" "btop" "gamemode" "steam" "mangohud" "zoxide" "fzf" "bat" "kitty" "geany" "geany-plugins" "tmux" "jdk23-openjdk" "docker" "ripgrep" "cargo" "fd" "starship" "okular" "vlc" "xclip" "isoimagewriter")
 
   for package in "${packages[@]}"; do
 	sudo pacman -S "$package" --noconfirm || { echo "Failed to install $package"; exit 1; }
@@ -90,7 +90,7 @@ echo "Done"
 install_yay
 
 echo "Installing packages from yay"
-yay -S --noconfirm "$(cat "$HOME/Linux/yay-packages.txt")"
+yay -S --noconfirm $(cat "$HOME/Linux/yay-packages.txt")
 echo "Finished!"
 
 echo "Changing pacman style..."
